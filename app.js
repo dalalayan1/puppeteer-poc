@@ -17,15 +17,20 @@ async function openHeadlessInstance(counter, url = "https://www.google.com/") {
   page.setViewport({width: 1366, height: 768});
   await page.goto(url);
   await page.screenshot({path: 'downloads/screenshot'+counter+'.png'});
-  await closeBrowser(browser, counter);
+  closeBrowser(browser, counter);
 }
 
-async function init() {
-    for(let i = 0; i < 10; i++) {
-        await openHeadlessInstance(i+1);
+function init(n) {
+    for(let i = 0; i < n; i++) {
+        openHeadlessInstance(i+1);
     }
 }
 
-(async () => {
-  await init();
+( () => {
+    try {
+        init(100);
+    } catch (error) {
+       console.log("EXCEPTION => ", error);
+       process.exit(1);
+    }
 })();
