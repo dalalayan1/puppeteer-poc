@@ -28,7 +28,7 @@ function init(n) {
 
 ( () => {
     try {
-        init(100);
+        init(10);
     } catch (error) {
        console.log("EXCEPTION => ", error);
        process.exit(1);
